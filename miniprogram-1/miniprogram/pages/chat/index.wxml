@@ -1,0 +1,83 @@
+<view class="chat-page">
+  <view class="chat-head">
+    <view class="history-btn" hover-class="btn-pressed" bindtap="openHistory">历史</view>
+    <view class="head-meta">
+      <view class="head-title">{{conversationTitle || '米鹊助手'}}</view>
+      <view class="online"><view class="dot"></view>随时为你服务</view>
+    </view>
+    <view class="new-chat" hover-class="btn-pressed" bindtap="newChat">＋ 新对话</view>
+  </view>
+
+  <scroll-view class="messages" scroll-y scroll-into-view="{{scrollId}}" scroll-with-animation>
+    <view wx:if="{{!messages.length}}" class="welcome">
+      <view class="welcome-title">今天想聊点什么？</view>
+      <view class="welcome-sub">写作、分析、翻译和灵感，都可以找我</view>
+      <view class="hints">
+        <view class="hint" bindtap="useHint" data-text="帮我写一段产品卖点文案">帮我写卖点文案</view>
+        <view class="hint" bindtap="useHint" data-text="把这段话翻译成英文">帮我翻译一段话</view>
+        <view class="hint" bindtap="useHint" data-text="给我 5 个创意选题">给我创意选题</view>
+      </view>
+    </view>
+
+    <view wx:for="{{messages}}" wx:key="index" id="m-{{index}}" class="message {{item.role}}">
+      <view wx:if="{{item.role==='assistant'}}" class="avatar">鹊</view>
+      <view class="bubble">{{item.content}}<text wx:if="{{item.streaming && !item.content}}" class="typing">•••</text></view>
+    </view>
+    <view id="m-end" class="bottom-space"></view>
+  </scroll-view>
+
+  <view wx:if="{{guest}}" class="guest-mask">
+    <view class="guest-title">登录后开始对话</view>
+    <view class="guest-sub">登录后即可使用米鹊助手，并保留历史会话</view>
+    <view class="guest-btn" bindtap="goLogin">去登录</view>
+  </view>
+
+  <view class="composer">
+    <view class="composer-field">
+      <textarea
+        class="composer-input"
+        auto-height
+        maxlength="10000"
+        value="{{input}}"
+        bindinput="onInput"
+        placeholder="输入消息…"
+        placeholder-class="composer-ph"
+        confirm-type="send"
+        adjust-position
+      />
+    </view>
+    <view class="send {{input && !sending ? 'ready' : ''}} {{sending ? 'busy' : ''}}" bindtap="send">{{sending ? '…' : '↑'}}</view>
+  </view>
+
+  <view wx:if="{{historyOpen}}" class="history-mask" catchtouchmove="preventMove" bindtap="closeHistory">
+    <view class="history-drawer" catchtap="preventMove">
+      <view class="history-head">
+        <view>
+          <view class="history-name">历史会话</view>
+          <view class="history-count">共 {{conversations.length}} 条</view>
+        </view>
+        <view class="history-close" bindtap="closeHistory">关闭</view>
+      </view>
+      <view class="history-new" hover-class="btn-pressed" bindtap="newChat">＋ 开启新对话</view>
+      <scroll-view class="history-list" scroll-y>
+        <view wx:if="{{!conversations.length}}" class="history-empty">还没有历史会话</view>
+        <view
+          wx:for="{{conversations}}"
+          wx:key="id"
+          class="history-item {{item.id === conversationId ? 'active' : ''}}"
+          data-id="{{item.id}}"
+          bindtap="switchChat"
+        >
+          <view class="history-copy">
+            <view class="history-title">{{item.title}}</view>
+            <view class="history-preview">{{item.preview || item.timeText}}</view>
+          </view>
+          <view class="history-side">
+            <view class="history-time">{{item.timeText}}</view>
+            <view class="history-del" data-id="{{item.id}}" catchtap="deleteChat">删除</view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

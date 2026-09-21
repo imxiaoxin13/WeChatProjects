@@ -1,0 +1,20 @@
+[Unit]
+Description=AI Creator FastAPI service
+After=network-online.target docker.service
+Wants=network-online.target docker.service
+
+[Service]
+Type=simple
+User=ai-creator
+Group=ai-creator
+WorkingDirectory=/opt/ai-creator-backend
+EnvironmentFile=/etc/ai-creator/ai-creator.env
+Environment=PYTHONUNBUFFERED=1
+ExecStartPre=/opt/ai-creator-backend/.venv/bin/alembic upgrade head
+ExecStart=/opt/ai-creator-backend/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 2
+Restart=always
+RestartSec=5
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target

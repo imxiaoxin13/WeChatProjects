@@ -1,0 +1,61 @@
+<view class="page">
+  <view class="hero">
+    <view class="hero-k">当前积分</view>
+    <view class="hero-balance">{{balance}}</view>
+    <view class="hero-rate">1 元 = {{rate}} 积分 · 充值后立即到账</view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">选择充值金额</view>
+    <view class="presets">
+      <view
+        wx:for="{{presets}}"
+        wx:key="yuan"
+        class="preset {{!usingCustom && selected===item.yuan ? 'active' : ''}}"
+        data-yuan="{{item.yuan}}"
+        bindtap="pickPreset"
+      >
+        <view wx:if="{{item.tag}}" class="preset-tag">{{item.tag}}</view>
+        <view class="preset-yuan">¥{{item.yuan}}</view>
+        <view class="preset-points">{{item.yuan * rate}} 积分</view>
+      </view>
+    </view>
+
+    <view class="custom {{usingCustom ? 'active' : ''}}" bindtap="pickCustom">
+      <view class="custom-head">
+        <view class="custom-title">自定义金额</view>
+        <view class="custom-tip">整数，最低 {{minYuan}} 元</view>
+      </view>
+      <view class="custom-field">
+        <text class="custom-unit">¥</text>
+        <input
+          class="custom-input"
+          type="number"
+          placeholder="输入金额"
+          value="{{customYuan}}"
+          bindinput="onCustomInput"
+          bindfocus="pickCustom"
+        />
+      </view>
+    </view>
+  </view>
+
+  <view class="card summary-card">
+    <view class="summary">
+      <text class="summary-k">实付金额</text>
+      <text class="summary-v">¥{{payYuan || '--'}}</text>
+    </view>
+    <view class="summary">
+      <text class="summary-k">到账积分</text>
+      <text class="summary-v accent">{{payPoints || '--'}}</text>
+    </view>
+  </view>
+
+  <view class="pay {{canPay ? '' : 'disabled'}}" hover-class="{{canPay ? 'pressed' : ''}}" bindtap="pay">微信支付 ¥{{payYuan || minYuan}}</view>
+
+  <view class="notes">
+    <view class="note">充值成功后积分立即到账，可用于生图、视频和对话。</view>
+    <view class="note">仅支持整数金额，最低 {{minYuan}} 元；充值后不支持退款。</view>
+    <view class="note">支付能力将接入微信支付，当前为即时到账。</view>
+  </view>
+</view>

@@ -1,0 +1,21 @@
+[Unit]
+Description=AI Creator Celery beat scheduler
+After=network-online.target docker.service
+Wants=network-online.target docker.service
+
+[Service]
+Type=simple
+User=ai-creator
+Group=ai-creator
+WorkingDirectory=/opt/ai-creator-backend
+EnvironmentFile=/etc/ai-creator/ai-creator.env
+Environment=PYTHONUNBUFFERED=1
+StateDirectory=ai-creator
+ExecStart=/opt/ai-creator-backend/.venv/bin/celery -A app.workers.celery_app:celery_app beat --loglevel=INFO --schedule=/var/lib/ai-creator/celerybeat-schedule
+Restart=always
+RestartSec=5
+TimeoutStopSec=30
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target

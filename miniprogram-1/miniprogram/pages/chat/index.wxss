@@ -1,0 +1,391 @@
+page {
+  height: 100%;
+  overflow: hidden;
+}
+
+.chat-page {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f4f6fa;
+  box-sizing: border-box;
+}
+
+.chat-head {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 18rpx 20rpx;
+  background: #fff;
+  border-bottom: 1rpx solid #eef0f4;
+}
+
+.history-btn,
+.new-chat {
+  flex-shrink: 0;
+  height: 64rpx;
+  padding: 0 22rpx;
+  border-radius: 18rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  line-height: 64rpx;
+}
+
+.history-btn {
+  background: #f3f5f9;
+  color: #4a5368;
+}
+
+.head-meta {
+  flex: 1;
+  min-width: 0;
+  padding: 0 16rpx;
+}
+
+.head-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #182033;
+  line-height: 1.3;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.online {
+  display: flex;
+  align-items: center;
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: #8a93a4;
+  line-height: 1.2;
+}
+
+.dot {
+  width: 12rpx;
+  height: 12rpx;
+  margin-right: 8rpx;
+  border-radius: 50%;
+  background: #2fc781;
+}
+
+.new-chat {
+  background: #eef0ff;
+  color: #5b54e0;
+}
+
+.btn-pressed {
+  opacity: 0.72;
+}
+
+.messages {
+  flex: 1;
+  height: 0;
+  padding: 8rpx 0 12rpx;
+  box-sizing: border-box;
+}
+
+.welcome {
+  padding: 120rpx 40rpx 40rpx;
+  text-align: center;
+}
+
+.welcome-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #182033;
+  line-height: 1.4;
+}
+
+.welcome-sub {
+  margin-top: 14rpx;
+  font-size: 26rpx;
+  color: #8b93a5;
+  line-height: 1.5;
+}
+
+.hints {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16rpx;
+  margin-top: 48rpx;
+}
+
+.hint {
+  padding: 16rpx 24rpx;
+  border-radius: 999rpx;
+  background: #fff;
+  color: #4a5368;
+  font-size: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(25, 35, 70, 0.05);
+}
+
+.message {
+  display: flex;
+  align-items: flex-start;
+  margin: 18rpx 28rpx;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 56rpx;
+  height: 56rpx;
+  margin-right: 14rpx;
+  border-radius: 18rpx;
+  background: linear-gradient(135deg, #6d5dfc, #4a8bf5);
+  color: #fff;
+  font-size: 22rpx;
+  font-weight: 700;
+  line-height: 56rpx;
+  text-align: center;
+}
+
+.bubble {
+  max-width: 74%;
+  padding: 20rpx 24rpx;
+  border-radius: 8rpx 24rpx 24rpx 24rpx;
+  background: #fff;
+  font-size: 28rpx;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+.user .bubble {
+  color: #fff;
+  background: linear-gradient(135deg, #655af0, #447ff3);
+  border-radius: 24rpx 8rpx 24rpx 24rpx;
+}
+
+.typing {
+  letter-spacing: 6rpx;
+}
+
+.bottom-space {
+  height: 24rpx;
+}
+
+.composer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 16rpx 20rpx 20rpx;
+  gap: 16rpx;
+  background: #fff;
+  box-shadow: 0 -8rpx 24rpx rgba(25, 30, 60, 0.04);
+  box-sizing: border-box;
+}
+
+.composer-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.composer-input {
+  width: 100%;
+  min-height: 80rpx;
+  max-height: 180rpx;
+  padding: 20rpx 24rpx;
+  border-radius: 24rpx;
+  background: #f3f5f9;
+  font-size: 28rpx;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.composer-ph {
+  color: #b0b6c4;
+}
+
+.send {
+  flex-shrink: 0;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 24rpx;
+  background: #c5cad6;
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: 700;
+  line-height: 80rpx;
+  text-align: center;
+}
+
+.send.ready {
+  background: linear-gradient(135deg, #6d5dfc, #4a8bf5);
+}
+
+.send.busy {
+  background: #9aa3b8;
+}
+
+.history-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(16, 20, 36, 0.42);
+}
+
+.history-drawer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 580rpx;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  box-shadow: 16rpx 0 48rpx rgba(20, 24, 50, 0.12);
+}
+
+.history-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx 28rpx 12rpx;
+}
+
+.history-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #182033;
+}
+
+.history-count {
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: #8a93a4;
+}
+
+.history-close {
+  height: 56rpx;
+  padding: 0 18rpx;
+  border-radius: 16rpx;
+  background: #f3f5f9;
+  color: #5b6272;
+  font-size: 24rpx;
+  line-height: 56rpx;
+}
+
+.history-new {
+  margin: 12rpx 24rpx 8rpx;
+  height: 72rpx;
+  border-radius: 20rpx;
+  background: linear-gradient(135deg, #6d5dfc, #4a8bf5);
+  color: #fff;
+  font-size: 26rpx;
+  font-weight: 600;
+  line-height: 72rpx;
+  text-align: center;
+}
+
+.history-list {
+  flex: 1;
+  height: 0;
+  padding: 8rpx 16rpx 24rpx;
+  box-sizing: border-box;
+}
+
+.history-empty {
+  padding: 80rpx 20rpx;
+  text-align: center;
+  color: #9aa2b2;
+  font-size: 26rpx;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+  padding: 22rpx 20rpx;
+  border-radius: 22rpx;
+  background: #f7f8fb;
+}
+
+.history-item.active {
+  background: #eef0ff;
+}
+
+.history-copy {
+  flex: 1;
+  min-width: 0;
+  padding-right: 12rpx;
+}
+
+.history-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #182033;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.history-preview {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: #8a93a4;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.history-side {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.history-time {
+  font-size: 20rpx;
+  color: #9aa3b5;
+}
+
+.history-del {
+  margin-top: 10rpx;
+  color: #e35151;
+  font-size: 22rpx;
+}
+
+.guest-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 108rpx;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40rpx;
+  background: rgba(244, 246, 250, .94);
+}
+
+.guest-title {
+  font-size: 36rpx;
+  font-weight: 800;
+}
+
+.guest-sub {
+  margin-top: 12rpx;
+  color: #8b93a5;
+  font-size: 24rpx;
+}
+
+.guest-btn {
+  margin-top: 32rpx;
+  padding: 18rpx 48rpx;
+  border-radius: 999rpx;
+  color: #fff;
+  background: linear-gradient(135deg, #6d5dfc, #387cff);
+  font-size: 28rpx;
+  font-weight: 700;
+}

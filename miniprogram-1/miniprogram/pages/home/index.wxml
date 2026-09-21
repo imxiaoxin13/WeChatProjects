@@ -1,0 +1,107 @@
+<view class="page">
+  <view class="hero">
+    <view class="eyebrow">CREATE WITH AI</view>
+    <view class="hero-title">让灵感，立刻成真</view>
+    <view class="hero-sub">图片、视频与智能对话，一站完成</view>
+    <view class="balance" bindtap="open" data-url="/pages/mine/index">
+      <view wx:if="{{loggedIn}}">
+        <text class="balance-num">{{user.balance}}</text>
+        <text class="balance-unit"> 积分</text>
+      </view>
+      <view wx:else>
+        <text class="balance-num login-cta">去登录</text>
+      </view>
+      <view class="balance-more">{{loggedIn ? '个人中心 ›' : '登录后查看积分 ›'}}</view>
+    </view>
+  </view>
+
+  <view class="section-title">开始创作</view>
+  <view class="tools">
+    <view class="tool tool-image" hover-class="tool-pressed" bindtap="open" data-url="/pages/image/index">
+      <view class="tool-glow"></view>
+      <view class="tool-icon">
+        <view class="ic-frame back"></view>
+        <view class="ic-frame front">
+          <view class="ic-sun"></view>
+          <view class="ic-hill"></view>
+        </view>
+      </view>
+      <view class="tool-copy">
+        <view class="tool-name">AI 生图</view>
+        <view class="tool-tip">文字与参考图生成</view>
+      </view>
+      <view class="tool-go">›</view>
+    </view>
+
+    <view class="tool tool-video" hover-class="tool-pressed" bindtap="open" data-url="/pages/video/index">
+      <view class="tool-glow"></view>
+      <view class="tool-icon">
+        <view class="ic-play"></view>
+      </view>
+      <view class="tool-copy">
+        <view class="tool-name">AI 视频</view>
+        <view class="tool-tip">视频生成与参考视频复刻</view>
+      </view>
+      <view class="tool-go">›</view>
+    </view>
+
+    <view class="tool tool-chat" hover-class="tool-pressed" bindtap="open" data-url="/pages/chat/index">
+      <view class="tool-glow"></view>
+      <view class="tool-icon">
+        <view class="ic-bubble main"></view>
+        <view class="ic-bubble mini"></view>
+      </view>
+      <view class="tool-copy">
+        <view class="tool-name">智能对话</view>
+        <view class="tool-tip">米鹊助手深度交流</view>
+      </view>
+      <view class="tool-go">›</view>
+    </view>
+  </view>
+
+  <view class="product-heading">
+    <view>
+      <view class="section-title product-title">TikTok 瑜伽裤爆品</view>
+      <view class="product-subtitle">美国站 · 近 30 天销量榜</view>
+    </view>
+    <view class="tiktok-badge">TikTok Shop</view>
+  </view>
+  <view class="source-note">TikTok Shop 数据 · 更新至 {{productUpdatedAt || '2026-09-19'}} · 每天 00:00 自动更新</view>
+
+  <view
+    wx:for="{{hotProducts}}"
+    wx:key="rank"
+    class="product-card"
+    hover-class="product-card-pressed"
+    bindtap="copyProduct"
+    data-brand="{{item.brand}}"
+    data-name="{{item.name}}"
+  >
+    <view class="rank rank-{{item.rank}}">{{item.rank}}</view>
+    <view class="product-content">
+      <view class="product-topline">
+        <view class="product-brand">{{item.brand}}</view>
+        <view class="category-tag">{{item.category}}</view>
+      </view>
+      <view class="product-name">{{item.name}}</view>
+      <view class="product-metrics">
+        <view class="metric">
+          <view class="metric-label">30日GMV</view>
+          <view class="metric-value gmv">{{item.gmv}}</view>
+        </view>
+        <view class="metric">
+          <view class="metric-label">30日销量</view>
+          <view class="metric-value">{{item.sales}}</view>
+        </view>
+        <view class="metric">
+          <view class="metric-label">均价</view>
+          <view class="metric-value">{{item.price}}</view>
+        </view>
+        <view class="metric">
+          <view class="metric-label">评分</view>
+          <view class="metric-value score">{{item.rating}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,11 @@
+services:
+  admin:
+    build:
+      context: .
+      args:
+        VITE_API_BASE: ${VITE_API_BASE:?set VITE_API_BASE}
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./deploy/certs:/etc/nginx/certs:ro
+

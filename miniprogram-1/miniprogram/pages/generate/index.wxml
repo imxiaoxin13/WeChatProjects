@@ -1,0 +1,79 @@
+<view class="page">
+  <view wx:if="{{!task && error}}" class="empty">{{error}}</view>
+  <view wx:elif="{{!task}}" class="boot">
+    <view class="spinner accent"></view>
+    <text>正在打开作品…</text>
+  </view>
+  <block wx:else>
+    <view class="hero {{phase}}">
+      <view class="hero-top">
+        <view wx:if="{{phase==='running'}}" class="spinner"></view>
+        <view wx:elif="{{phase==='success'}}" class="mark">成</view>
+        <view wx:else class="mark">失</view>
+        <view class="hero-copy">
+          <view class="hero-title">{{title}}</view>
+          <view class="hero-sub">{{subtitle}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card steps-card">
+      <view class="card-title">生成进度</view>
+      <view class="steps">
+        <view wx:for="{{steps}}" wx:key="name" class="step {{item.state}}">
+          <view class="rail">
+            <view class="rail-seg left"></view>
+            <view class="dot">{{index+1}}</view>
+            <view class="rail-seg right"></view>
+          </view>
+          <text>{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-head">
+        <view class="card-title">画面预览</view>
+        <text class="muted">{{ratio}} · {{kind}}</text>
+      </view>
+      <view class="stage">
+        <view class="stage-box" style="{{boxStyle}}">
+          <image wx:if="{{image}}" src="{{image}}" mode="aspectFill" bindtap="preview"/>
+          <video wx:elif="{{video}}" src="{{video}}" controls object-fit="contain" show-fullscreen-btn/>
+          <view wx:elif="{{phase==='fail'}}" class="stage-empty">{{task.error_message || '生成失败，积分将自动退还'}}</view>
+          <view wx:else class="stage-empty">
+            <view class="pulse"></view>
+            <text>生成完成后将在这里展示</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">{{kind}}描述</view>
+      <view class="prompt">{{task.prompt}}</view>
+    </view>
+
+    <view class="card info-card">
+      <view class="info">
+        <text class="info-k">创作类型</text>
+        <text class="info-v">AI {{kind}}</text>
+      </view>
+      <view class="info">
+        <text class="info-k">画面比例</text>
+        <text class="info-v">{{ratio}}</text>
+      </view>
+      <view class="info">
+        <text class="info-k">提交时间</text>
+        <text class="info-v">{{createdText || '刚刚'}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{phase==='running'}}" class="hint">{{hint}}</view>
+
+    <view class="actions">
+      <view class="act-btn ghost" bindtap="createAgain">继续创作</view>
+      <view class="act-btn main" bindtap="toWorks">查看作品</view>
+    </view>
+  </block>
+</view>

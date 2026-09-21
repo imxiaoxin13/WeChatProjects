@@ -1,0 +1,54 @@
+<view class="page">
+  <view wx:if="{{!loggedIn}}" class="guest-card">
+    <view class="guest-mark">我</view>
+    <view class="guest-title">登录后开始创作</view>
+    <view class="guest-sub">微信登录更快；也可以使用账号密码登录或注册。</view>
+    <view class="wechat-btn" hover-class="pressed" bindtap="wechatLogin">微信一键登录</view>
+    <view class="account-btn" hover-class="pressed" bindtap="openAuth">账号注册 / 登录</view>
+  </view>
+
+  <block wx:else>
+    <view class="profile-card">
+      <view class="profile-row">
+        <image wx:if="{{user.avatar_url}}" class="avatar" src="{{user.avatar_url}}" mode="aspectFill"/>
+        <view wx:else class="avatar avatar-text">{{avatarText}}</view>
+        <view class="profile-meta">
+          <view class="name-row" bindtap="editNickname">
+            <view class="display-name">{{displayName}}</view>
+            <view class="edit">修改</view>
+          </view>
+          <view class="account-line">{{user.username ? '账号 ' + user.username : '微信用户'}}</view>
+          <view wx:if="{{user.has_password}}" class="badges">
+            <view class="badge">账号登录</view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{!user.wechat_bound}}" class="bind-btn" hover-class="pressed" bindtap="bindWechat">绑定微信，下次自动登录</view>
+    </view>
+
+    <view class="wallet-card">
+      <view class="muted light">可用积分</view>
+      <view class="balance">{{user.balance}}</view>
+      <view class="frozen">冻结中 {{user.frozen || 0}} 积分</view>
+    </view>
+  </block>
+
+  <view class="menu">
+    <view
+      wx:for="{{menus}}"
+      wx:key="url"
+      class="menu-item"
+      data-url="{{item.url}}"
+      data-auth="{{item.auth}}"
+      bindtap="openMenu"
+    >
+      <view class="menu-copy">
+        <view class="menu-name">{{item.name}}</view>
+        <view class="menu-tip">{{item.tip}}</view>
+      </view>
+      <view class="menu-go">›</view>
+    </view>
+  </view>
+
+  <view wx:if="{{loggedIn}}" class="logout" hover-class="pressed" bindtap="logout">退出登录</view>
+</view>

@@ -1,0 +1,10 @@
+<view class="page">
+  <view wx:if="{{!orders.length}}" class="empty">暂无充值订单</view>
+  <view wx:for="{{orders}}" wx:key="id" class="order">
+    <view>
+      <view class="order-no">{{item.order_no}}</view>
+      <view class="muted">{{item.points}} 积分 · {{item.priceText}}</view>
+    </view>
+    <view class="order-status {{item.status}}">{{item.statusText}}</view>
+  </view>
+</view>

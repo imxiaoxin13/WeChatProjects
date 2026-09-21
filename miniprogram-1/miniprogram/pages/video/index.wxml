@@ -1,0 +1,61 @@
+<view class="page">
+  <view class="intro">
+    <view class="tag">VIDEO LAB</view>
+    <view class="title">让想法动起来</view>
+    <view class="muted">支持视频生成和参考视频复刻</view>
+  </view>
+  <view class="modes">
+    <view class="mode {{mode==='generate'?'active':''}}" data-mode="generate" bindtap="setMode">视频生成</view>
+    <view class="mode {{mode==='replicate'?'active':''}}" data-mode="replicate" bindtap="setMode">参考视频复刻</view>
+  </view>
+  <view class="card">
+    <view class="label">创作要求</view>
+    <textarea class="prompt" maxlength="5000" value="{{prompt}}" bindinput="onPrompt" placeholder="{{mode==='generate'?'描述主体、场景、动作、镜头、光线与画面风格…':'描述需要替换的主体、镜头节奏和画面风格…'}}"/>
+  </view>
+  <view wx:if="{{mode==='replicate'}}" class="card">
+    <view class="label">参考视频链接</view>
+    <input class="input" value="{{referenceVideoUrl}}" bindinput="onReference" placeholder="请粘贴抖音/TikTok 视频分享链接"/>
+    <view class="image-tip">打开具体视频后复制链接，不要用搜索页</view>
+  </view>
+  <view wx:if="{{mode==='replicate'}}" class="card">
+    <view class="row">
+      <view>
+        <view class="label">替换素材图片</view>
+        <view class="image-tip">用于替换参考视频中的主体</view>
+      </view>
+      <view class="muted">{{images.length}} / 5</view>
+    </view>
+    <scroll-view scroll-x class="image-scroll">
+      <view wx:for="{{images}}" wx:key="*this" class="image-item">
+        <image src="{{item}}" mode="aspectFill"/>
+        <view class="remove" data-index="{{index}}" bindtap="remove">×</view>
+      </view>
+      <view wx:if="{{images.length < 5}}" class="add" bindtap="choose">＋<text>添加</text></view>
+    </scroll-view>
+  </view>
+  <view class="card options-card">
+    <view class="label options-title">生成参数</view>
+    <view class="parameter">
+      <view class="parameter-title">视频秒数</view>
+      <view class="duration-control">
+        <slider class="duration-slider" min="0" max="{{durationSliderMax}}" step="1" value="{{durationIndex}}" activeColor="#111111" backgroundColor="#e2e3e7" block-color="#111111" block-size="24" bindchanging="pickDurationSlider" bindchange="pickDurationSlider"/>
+        <view class="duration-value">{{duration}}<text>秒</text></view>
+      </view>
+    </view>
+    <view class="parameter">
+      <view class="parameter-title">分辨率</view>
+      <scroll-view scroll-x class="choices">
+        <view wx:for="{{resolutions}}" wx:key="*this" class="choice {{resolution===item?'active':''}}" data-value="{{item}}" bindtap="pickResolution">{{item}}</view>
+      </scroll-view>
+    </view>
+    <view class="parameter last">
+      <view class="parameter-title">画面比例</view>
+      <scroll-view scroll-x class="choices">
+        <view wx:for="{{aspectRatios}}" wx:key="*this" class="choice {{aspectRatio===item?'active':''}}" data-value="{{item}}" bindtap="pickAspectRatio">{{item}}</view>
+      </scroll-view>
+    </view>
+  </view>
+  <view class="fab-wrap">
+    <button class="fab" loading="{{submitting}}" bindtap="submit">确认生成</button>
+  </view>
+</view>

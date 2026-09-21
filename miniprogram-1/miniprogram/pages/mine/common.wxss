@@ -1,0 +1,117 @@
+.packages {
+  display: grid;
+  gap: 16rpx;
+}
+
+.package {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 26rpx 30rpx;
+  background: #fff;
+  border-radius: 24rpx;
+}
+
+.points {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.points text {
+  font-size: 23rpx;
+}
+
+.bonus {
+  display: inline-block;
+  color: #dd7e20;
+  background: #fff2df;
+  padding: 5rpx 11rpx;
+  border-radius: 10rpx;
+  font-size: 20rpx;
+  margin-top: 8rpx;
+}
+
+.package-name {
+  color: #8b93a5;
+  font-size: 22rpx;
+  margin-top: 8rpx;
+}
+
+.price-col {
+  text-align: right;
+}
+
+.price {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #6259e8;
+}
+
+.buy {
+  margin-top: 8rpx;
+  color: #8b93a5;
+  font-size: 20rpx;
+}
+
+.notice {
+  color: #929aaa;
+  font-size: 22rpx;
+  padding: 20rpx 8rpx 8rpx;
+}
+
+.order,
+.ledger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 24rpx 28rpx;
+  border-bottom: 1rpx solid #eff1f5;
+}
+
+.order:first-of-type,
+.ledger:first-of-type {
+  border-radius: 22rpx 22rpx 0 0;
+}
+
+.order:last-of-type,
+.ledger:last-of-type {
+  border-radius: 0 0 22rpx 22rpx;
+  border-bottom: 0;
+}
+
+.order-no,
+.ledger-kind {
+  font-size: 27rpx;
+  margin-bottom: 6rpx;
+}
+
+.order-status {
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.order-status.pending {
+  color: #d48b16;
+}
+
+.order-status.paid {
+  color: #12a06a;
+}
+
+.order-status.rejected {
+  color: #de5959;
+}
+
+.amount {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.plus {
+  color: #12a06a;
+}
+
+.minus {
+  color: #de5959;
+}

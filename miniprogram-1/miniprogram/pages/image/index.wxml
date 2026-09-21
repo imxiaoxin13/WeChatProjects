@@ -1,0 +1,38 @@
+<view class="page">
+  <view class="intro">
+    <view class="tag">IMAGE STUDIO</view>
+    <view class="title">描述你的想象</view>
+    <view class="muted">可添加最多 5 张参考图，帮助 AI 理解风格与主体</view>
+  </view>
+  <view class="card">
+    <view class="label">画面描述</view>
+    <textarea class="prompt" maxlength="5000" placeholder="例如：一只戴着宇航员头盔的橘猫，漂浮在梦幻星云中，电影感光影…" value="{{prompt}}" bindinput="onPrompt"/>
+    <view class="counter">{{prompt.length}} / 5000</view>
+  </view>
+  <view class="card">
+    <view class="row">
+      <view class="label">参考图片</view>
+      <view class="muted">{{localImages.length}} / 5</view>
+    </view>
+    <view class="images">
+      <view wx:for="{{localImages}}" wx:key="*this" class="thumb">
+        <image src="{{item}}" mode="aspectFill"/>
+        <view class="remove" data-index="{{index}}" bindtap="remove">×</view>
+      </view>
+      <view wx:if="{{localImages.length < 5}}" class="add" bindtap="choose">＋<text>添加图片</text></view>
+    </view>
+  </view>
+  <view class="card">
+    <view class="label">画面比例</view>
+    <view class="ratios">
+      <view wx:for="{{ratios}}" wx:key="value" class="ratio {{ratio===item.value?'active':''}}" data-value="{{item.value}}" bindtap="pickRatio">
+        <view class="ratio-frame" style="width: {{item.w}}rpx; height: {{item.h}}rpx;"></view>
+        <text class="ratio-name">{{item.label}}</text>
+        <text class="ratio-value">{{item.value}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="fab-wrap">
+    <button class="fab" loading="{{submitting}}" bindtap="submit">立即生成图片</button>
+  </view>
+</view>

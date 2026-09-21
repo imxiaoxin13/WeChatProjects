@@ -1,0 +1,21 @@
+name: wechatprojects
+
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    ports: ["127.0.0.1:3306:3306"]
+    environment:
+      MYSQL_DATABASE: ai_creator
+      MYSQL_USER: ai_creator
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?set MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?set MYSQL_ROOT_PASSWORD}
+    volumes: [mysql-data:/var/lib/mysql]
+    healthcheck: {test: ["CMD", "mysqladmin", "ping", "-h", "localhost"], interval: 10s, timeout: 5s, retries: 10}
+  redis:
+    image: redis:7.4-alpine
+    restart: unless-stopped
+    ports: ["127.0.0.1:6379:6379"]
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes: [redis-data:/data]
+volumes: {mysql-data: {}, redis-data: {}}

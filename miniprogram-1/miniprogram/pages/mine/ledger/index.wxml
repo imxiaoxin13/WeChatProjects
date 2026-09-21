@@ -1,0 +1,10 @@
+<view class="page">
+  <view wx:if="{{!ledger.length}}" class="empty">暂无积分记录</view>
+  <view wx:for="{{ledger}}" wx:key="id" class="ledger">
+    <view>
+      <view class="ledger-kind">{{item.kindText}}</view>
+      <view class="muted">{{item.note || 'AI 创作积分变动'}}</view>
+    </view>
+    <view class="amount {{item.amount>=0?'plus':'minus'}}">{{item.amount>=0?'+':''}}{{item.amount}}</view>
+  </view>
+</view>

@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/image/index",
+    "pages/video/index",
+    "pages/generate/index",
+    "pages/chat/index",
+    "pages/works/index",
+    "pages/mine/index",
+    "pages/mine/auth/index",
+    "pages/mine/recharge/index",
+    "pages/mine/orders/index",
+    "pages/mine/ledger/index"
+  ],
+  "window": {"backgroundColor":"#F4F6FA","backgroundTextStyle":"light","navigationBarBackgroundColor":"#F4F6FA","navigationBarTitleText":"AI 创作空间","navigationBarTextStyle":"black"},
+  "tabBar": {
+    "color":"#8A91A3","selectedColor":"#635BFF","backgroundColor":"#FFFFFF","borderStyle":"white",
+    "list":[
+      {
+        "pagePath":"pages/home/index",
+        "text":"首页",
+        "iconPath":"images/tab/home.png",
+        "selectedIconPath":"images/tab/home-active.png"
+      },
+      {
+        "pagePath":"pages/chat/index",
+        "text":"对话",
+        "iconPath":"images/tab/chat.png",
+        "selectedIconPath":"images/tab/chat-active.png"
+      },
+      {
+        "pagePath":"pages/works/index",
+        "text":"作品",
+        "iconPath":"images/tab/works.png",
+        "selectedIconPath":"images/tab/works-active.png"
+      },
+      {
+        "pagePath":"pages/mine/index",
+        "text":"我的",
+        "iconPath":"images/tab/mine.png",
+        "selectedIconPath":"images/tab/mine-active.png"
+      }
+    ]
+  },
+  "sitemapLocation":"sitemap.json","style":"v2","lazyCodeLoading":"requiredComponents"
+}
