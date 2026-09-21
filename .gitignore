@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+
+# JetBrains IDE
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Celery
+celerybeat-schedule.db
+celerybeat-schedule*
+
+# Node
+node_modules/
+dist/
+
+# Logs & local env
+*.log
+.env
+.env.local
